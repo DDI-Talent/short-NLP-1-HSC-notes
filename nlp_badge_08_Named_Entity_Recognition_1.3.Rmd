@@ -1,6 +1,8 @@
 ---
 title: "Badge 8 Named Entity Recognition"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 # Named Entity Recognition
@@ -9,7 +11,7 @@ In this notebook we will try a few tools for recognising entities (places, peopl
 
 ## Pipes! All the Pipes!
 
-You already noticed that while we learn about NLP we also experience some new advanced elements of R language. You already know `%>%` pipe, but recently R community is using more and more a simpler (ubt just as powerful) syntax for a pipe `|>`. It is made of two symbols: a vertical line `|` (which depending on your keyboard could be on the very right-hand-side, or very left-hand-side) and the larger-than symbol `>`. 
+You already noticed that while we learn about NLP we also experience some new advanced elements of R language. You already know `%>%` pipe, but recently R community is using more and more a simpler (but just as powerful) syntax for a pipe `|>`. It is made of two symbols: a vertical line `|` (which depending on your keyboard could be on the very right-hand-side, or very left-hand-side) and the larger-than symbol `>`. 
 
 You can use `|>` pipe in the same way as `%>%`. But some very advanced uses are different.
 
@@ -63,7 +65,7 @@ We will load our Corona data into a data frame and then create a string from our
 We use `str_flatten` to create a string from our column text data. `str_flatten` reduces a character vector to a single string - it is concatenating all the strings in the text column to a single sting.
 
 ```{r}
-#Load the corona csv to a datframe
+#Load the corona csv to a dataframe
 file_path='./data/CORONA_TWEETS.csv'
 Corona_NLP_DF <- read.csv(file_path, stringsAsFactors =FALSE, header=TRUE)
 #Creating a str from our Corona data text column
@@ -235,7 +237,7 @@ show_only_recognised(entities_in_word)
 
 ## ACTIVITY: What do you notice about the outputs of above two sentences?
 
-Look carefully at the outpits of above code. Two sentences provide slightly different outputs of the named entity recognition. Why do you think it finds some names and locations and not others?
+Look carefully at the outputs of above code. Two sentences provide slightly different outputs of the named entity recognition. Why do you think it finds some names and locations and not others?
 
 Can you do any preprocessing that may help? Try doing it by hand (literally scroll up and change the sentences, re-run the code and see if things improved). Do you feel this process of cleaning up like this could be automated?
 
@@ -298,7 +300,7 @@ Now we are going to create a separate data frame for Locations and count the num
 #First we add a column for row number
 Corona_NLP_DF %<>% mutate(row = row_number())
 
-#Now we create a datframe, first removing any columns with NULL as Location and then unnest the entries where there are multiple countries in a tweet.
+#Now we create a dataframe, first removing any columns with NULL as Location and then unnest the entries where there are multiple countries in a tweet.
 country_counts_from_recogniser  <- Corona_NLP_DF %>% 
   filter(!is.null(Loc)) %>%
   unnest(Loc) %>%

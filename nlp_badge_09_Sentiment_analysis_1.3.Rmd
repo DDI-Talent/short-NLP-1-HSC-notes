@@ -30,7 +30,7 @@ corona_tibble<-as_tibble(Corona_NLP_DF)
 
 ## Sentiment Analysis - Methods and Dictionaries:
 
-This text is taken from ['Text Mining with R'](https://www.tidytextmining.com/sentiment) by Jilie Silge and David Robertson
+This text is taken from ['Text Mining with R'](https://www.tidytextmining.com/sentiment) by Julia Silge and David Robertson
 
 ------------------------------------------------------------------------
 
@@ -191,7 +191,7 @@ sentiment_for_country_word <- function(country_name){
   
   print(sents_with_country)
   if(sents_with_country == "character(0)"){
-    return("Not Found") # in R you do not need to explicitly RETURN a value from a function, but you can suround it with return() if it helps readability 
+    return("Not Found") # in R you do not need to explicitly RETURN a value from a function, but you can surround it with return() if it helps readability 
   }else{  
     sents_with_country <- sents_with_country |> str_to_lower()
     avg_sentiment <- sentiment_dict |>
@@ -235,7 +235,7 @@ pacman::p_load(topicmodels, tidytext, ggplot2, dplyr, tm)
 A dataset we will use is a collection of 2246 news articles from [Associated Press data, gathered for a conference in 1992](https://search.r-project.org/CRAN/refmans/topicmodels/html/associatedpress.html)
 
 ```{r}
-# once you download the dataset with this line, you will have access to the variable AssociatedPress
+# once you download the dataset with this line, you will have access to the variable Associated Press
 data("AssociatedPress")
 
 # try it, get a few terms
@@ -277,7 +277,7 @@ topic_dist <- posterior(ap_lda)$topics
 print(head(topic_dist))
 ```
 
-Do you see how second document clearly belongs to two topics? The one about president of USA and the one about federal course cases. It would be nice to confirm it by reading the document, but this dataset does not include the original text of the documents. Later in this notebook we will look at a simmilar exercise on a different dataset (which does provide us with the souce documents!).
+Do you see how second document clearly belongs to two topics? The one about president of USA and the one about federal course cases. It would be nice to confirm it by reading the document, but this dataset does not include the original text of the documents. Later in this notebook we will look at a similar exercise on a different dataset (which does provide us with the source documents!).
 
 Meanwhile, ere we graph the top terms for each topic
 
@@ -300,7 +300,7 @@ ap_top_terms %>%
 
 ## ANOTHER DATASET and the same journey!
 
-In this next activity we will repeat the same journey we did over last 5 minutes, but on a different dataset. Since each dataset has many of its own pecularities, there will be some extra steps, so stay sharp!
+In this next activity we will repeat the same journey we did over last 5 minutes, but on a different dataset. Since each dataset has many of its own peculiarities, there will be some extra steps, so stay sharp!
 
 Let's have a look at a dataset that we can both eyeball, and analyse. To achieve that we will
 
@@ -351,10 +351,10 @@ then there's an extra cleanup step, which gave us a lot of headache to figure ou
 
 
 ```{r}
-pacman::p_load(slam) ## this one is for the matrix operations (eg. hunting down our empty term)
+pacman::p_load(slam) ## this one is for the matrix operations (e.g.. hunting down our empty term)
 
 # this bit is a bit complex to explain, but it can happen that some terms do not appear in documents. 
-# It's often a fault of encoding, or unrecognised symbols from non-latin alphabets. To avoid drama, we will clean them up here:
+# It's often a fault of encoding, or unrecognised symbols from non-Latin alphabets. To avoid drama, we will clean them up here:
 
 # empty_terms <- rowSums(as.matrix(news_articles_dtm)) == 0  # which terms have no values (sum is 0)
 # news_articles_dtm <- news_articles_dtm[!empty_terms, ] # keep all rows, apart of those empty ones
@@ -382,13 +382,13 @@ news_articles_terms %>%
 OK, let's create an LDA, and see what topics we can find in the data. Let's start with 6 topics:
 
 ```{r}
-# this next operation is really memory-intensive and will take a while. Your rstudio might crash. To give you a better chance, let's clean up our data environment and remove all variables apart of the ones we actually need right now. (it does mean that you will have to re-run some of your notebook if you want to scrolll back and repeat some acticities)
+# this next operation is really memory-intensive and will take a while. Your rstudio might crash. To give you a better chance, let's clean up our data environment and remove all variables apart of the ones we actually need right now. (it does mean that you will have to re-run some of your notebook if you want to scroll back and repeat some activities)
 
 # remove all variables apart of 
 rm(list = setdiff(ls(), c("news_articles_dtm", "df2", "news_articles")))
 ```
 
-With some more space (you see how the Environment seciton of Rstudio is empty?) let's give it a try!
+With some more space (you see how the Environment section of Rstudio is empty?) let's give it a try!
 
 ```{r}
 # creating a new LDA might take a few minutes
