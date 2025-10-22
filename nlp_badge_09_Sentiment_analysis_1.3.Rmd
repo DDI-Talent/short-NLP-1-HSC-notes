@@ -1,6 +1,8 @@
 ---
 title: "Badge 9 Sentiment Analysis & Topic Modelling"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 # Sentiment Analysis & Topic Modelling

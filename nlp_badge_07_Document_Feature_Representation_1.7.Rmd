@@ -291,7 +291,7 @@ glove_file_name <- "./data/wiki_giga_2024_50_MFT20_vectors_seed_123_alpha_0.75_e
 
 # Load GloVe embeddings (I find sometimes trying to read as a csv can cause memory issues depending on your set-up)
 IF_MEMORY_IS_SPARESE_LOAD_JUST_THIS_MANY_WORDS <- 100000 # to load everything, change this value to -1
-# if you limit the word cooccurences here, keep in mind that some words will be missing (e.g. 'itemising')
+# if you limit the word co-occurrences here, keep in mind that some words will be missing (e.g. 'itemising')
 
 glove_embeddings <- fread(glove_file_name, header = FALSE, quote = " ", nrows = IF_MEMORY_IS_SPARESE_LOAD_JUST_THIS_MANY_WORDS)
 
