@@ -5,7 +5,7 @@ output: html_notebook
 
 # NLP Performance Metrics
 
-**Note before we start abotu Rstudio setup**: your R studio might be setup to replace Tabs with double spaces. If that starts happening in yoru text files (especially .ann files where there is a bit difference between meaning of tabs and spaces)... you might see some weird behaviours. This setting can be disabled in RStudio > Project Options > Code Editing > disable it there.
+**Note before we start about Rstudio setup**: your R studio might be setup to replace Tabs with double spaces. If that starts happening in your text files (especially .ann files where there is a bit difference between meaning of tabs and spaces)... you might see some weird behaviours. This setting can be disabled in RStudio > Project Options > Code Editing > disable it there.
 
 ## What are True/False Positives/Negatives?
 
@@ -27,8 +27,8 @@ Let's take the example from the slides:
 We evaluate 200 items. Out of those: 80 we thought are TRUE, and 120 we thought are FALSE.
 But when we compared our results with the golden/correct answers:
 
-- from our 80 guessess of TRUE, 70 were correctly guessed (were indeed TRUE) and 10 were not correctly guessed (they were actually meant to be FALSE).
-- from our 120 guessess of FALSE, 100 were correctly guessed (were indeed FALSE) and 20 were not correctly guessed (they were actually meant to be TRUE).
+- from our 80 guesses of TRUE, 70 were correctly guessed (were indeed TRUE) and 10 were not correctly guessed (they were actually meant to be FALSE).
+- from our 120 guesses of FALSE, 100 were correctly guessed (were indeed FALSE) and 20 were not correctly guessed (they were actually meant to be TRUE).
 
 ## ACTIVITY: What are the TP,FP,FN, TN values for the above scenario?
 
@@ -63,7 +63,7 @@ a <- 2
 b <- 5
 c <- 9
 something <- (a + b) / c
-cat("Some answer:", round(something, 7), "\n") # eg. round to 7 decimals
+cat("Some answer:", round(something, 7), "\n") # e.g.. round to 7 decimals
 ``` 
 OK now it's your turn:
 ```{r}
@@ -87,7 +87,7 @@ cat("something else else?", "\n")
 
 ## Fun R stuff: difference between print() and cat()
 
-In R there is a useful 'interpreted print' called `cat()` - it stands for Concatenate and Print. Concatenate is a fancy word for glueing many strings together.
+In R there is a useful 'interpreted print' called `cat()` - it stands for Concatenate and Print. Concatenate is a fancy word for gluing many strings together.
 
 ```{r}
 # cat() is like print() but it will INTERPRET special characters like \n (Enter) or \t (Tab)
@@ -140,7 +140,7 @@ Lets compare two BRAT annotation files and calculate Precision, Recall and F1
 
 What we'll do:
 
-- We'll create and use function thatturns an .ann file into a dataframe. 
+- We'll create and use function that turns an .ann file into a dataframe. 
 - Then we will use that function to turn two files `gold` is the golden standard (the truth), and `pred` is our model's prediction.
 - Then we will compare how accurate etc is the `prediction`, when compared to `golden value`.
  
@@ -168,7 +168,7 @@ read_brat_file <- function(file_path) {
   
   for (line in ann_data) {
     parts <- unlist(strsplit(line, "\t")) # first split by TAB
-    # Extract entity type and positions (see above examle about tabs and spaces)
+    # Extract entity type and positions (see above example about tabs and spaces)
     entity_id <- parts[1]
     entity_info <- unlist(strsplit(parts[2], "\\s")) # then detailed info by SPACE
     entity_text <- parts[3]
@@ -199,7 +199,7 @@ read_brat_file <- function(file_path) {
 }
 ```
 
-And now let's use that function twice. After running it, check ou the values in both dataframes `gold_annotations` and `pred_annotations` in the Environment section of your RStudio.
+And now let's use that function twice. After running it, check out the values in both dataframes `gold_annotations` and `pred_annotations` in the Environment section of your RStudio.
 
 ```{r}
 # Load the gold and predicted annotations

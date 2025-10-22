@@ -297,7 +297,7 @@ If you've never see `%>%` syntax, it is called `PIPE` (like in plumbing) and is 
 nchar("banana") # nchar function takes one argument: the string of which it will return a "number of characters" (length)
 
 # but with pipe, we do not give an argument to nchar() but instead we pipe/feed collection of 3 words into it,
-# and pipe will 'feed' each item in the collection into nchar() as its fitst argument, one after another
+# and pipe will 'feed' each item in the collection into nchar() as its first argument, one after another
 c("banana","kiwi","pear")  %>% nchar() 
 ```
 

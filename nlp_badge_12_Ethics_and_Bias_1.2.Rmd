@@ -5,7 +5,7 @@ output: html_notebook
 
 # Ethics and Bias
 
-There aren't really any programming exercises for this badge. So just jusp straight to your 3 Stars and 1 Wish.
+There aren't really any programming exercises for this badge. So just just straight to your 3 Stars and 1 Wish.
 
 # Reflection:
 
