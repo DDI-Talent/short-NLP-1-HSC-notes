@@ -23,11 +23,11 @@ text ="Hello I am Marianna and this is Mary Jane who lives in Scotland. We work 
 show_only_recognised(text)
 ```
 Hypothesis (some of which we can fix or test, some we can't without re-training the model):
-- 'Scotland.' (with a full stop) is not recognised a s acountry. We could remove pubcluation.
+- 'Scotland.' (with a full stop) is not recognised as a country. We could remove publication.
 - 'Mary' is not recognised as a name, maybe because tokens are lower-cased, and 'mary' means 'happy'? To fix that we might need to re-train the model to not ignore capitalisation?
 - 'Meilo' is an uncommon name
 - 'United Kingdom' because it has two words?
-- 'Mary Jane' - not su sure? all of the above?
+- 'Mary Jane' - not so sure? all of the above?
 
 Since code is not a part of this activity, we won't be fixing those. but have a look at this: if all we change is how we separate tokens, using `\\W` (non-word characters) rather than `\\s+` (spaces)... we already fix the problem with the dot in `Scotland.` (last item).
 

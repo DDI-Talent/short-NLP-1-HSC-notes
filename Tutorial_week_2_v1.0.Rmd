@@ -1,7 +1,7 @@
 # Tutorial 2: Pride, Prejudice and MORE ADVANCED NLP
 
-In the second tutorial we will again try to have some fun with a text of an old book, but this tikme we will use new set of tools we picjked up in week 2.
-Again as text we picked a freely available copy (via guttenberg project) of "Pride and Prejudice" by English author Jane Austen from 1813.
+In the second tutorial we will again try to have some fun with a text of an old book, but this time we will use new set of tools we picked up in week 2.
+Again as text we picked a freely available copy (via Gutenberg project) of "Pride and Prejudice" by English author Jane Austen from 1813.
 
 Below you will find a piece of code that loads the book. From there on, try to tackle tasks with your partner, and try to have some fun. We'd like to encourage you to switch after each task who's the driver (the person sharing their screen and typing).
 
@@ -31,7 +31,7 @@ What n-grams are common in this text? What are common 2- and 3-word phrases you 
 
 ## Task 2. When you stare at the clouds... the clouds stare back at you! (word frequency and wordclouds)
 
-Look at the common words, and remove those that you do not feel to be meaningful. Then visualise the popular ones with a wordcoud (badge 5)
+Look at the common words, and remove those that you do not feel to be meaningful. Then visualise the popular ones with a word cloud (badge 5)
 
 ```{r}
 # your code here. You can create more 'code cells' with a green [+c] icon on top 
@@ -39,7 +39,7 @@ Look at the common words, and remove those that you do not feel to be meaningful
  
 ## Task 3. Pride and Adjectives
 
-Looking at the POS taggin in this text, what can you deduce about language used in it? (badge 6)
+Looking at the POS tagging in this text, what can you deduce about language used in it? (badge 6)
 
 Can you try to identify the most common Adjectives? 
 
