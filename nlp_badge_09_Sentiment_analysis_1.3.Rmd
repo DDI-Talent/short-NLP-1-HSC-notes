@@ -237,7 +237,7 @@ pacman::p_load(topicmodels, tidytext, ggplot2, dplyr, tm)
 A dataset we will use is a collection of 2246 news articles from [Associated Press data, gathered for a conference in 1992](https://search.r-project.org/CRAN/refmans/topicmodels/html/associatedpress.html)
 
 ```{r}
-# once you download the dataset with this line, you will have access to the variable Associated Press
+# once you download the dataset with this line, you will have access to the variable AssociatedPress
 data("AssociatedPress")
 
 # try it, get a few terms

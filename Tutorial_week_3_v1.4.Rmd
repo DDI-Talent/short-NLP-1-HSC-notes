@@ -10,7 +10,7 @@ Below tasks will challenge you to apply (not just repeat) the techniques from ba
 You goal: Verify the thesis: More common words in Pride and Prejudice have meaning similar to "Love" than to "Family"?
 
 1. Find some (100? 500? 1000?) most common words in the book (e.g. using badge 5 activity "Terms frequency". You might also want to `anti_join(stop_words)`)
-2. Create two new columns in which you will store the given words similarity to word `love` and another one for similarity with word `family` (e.g.. by Using answers answers to badge 7 activity with Glove files)
+2. Create two new columns in which you will store the given words similarity to word `love` and another one for similarity with word `family` (e.g. by Using answers answers to badge 7 activity with Glove files)
 3. Look at the top values for each term, and decide on a a cut-off point (what similarity value should already not count as similar). Then add occurrences of all good words and all bad words.
 4. Validate or deny the thesis.
 
@@ -78,7 +78,7 @@ now do the thing:
 
 ## TASK 2: Prouder and More Prejudiced! Improve the entity recognition by cleaning up the dataset better!
 
-In the badge 8 we had a good simple test if the entity recognition recognises every sentence of Elisabeth as a person. We have out 'point of truth'/'perfect answer' by just counting the occurrences of a word `Elizabeth` (634 times). Then we use Entity recognition, and check how many times there a word Elizabeth was recognised as a person (e.g.. 420 times). If Entity recognition gets very close to simple word count (to 634) then we can be more confident that it works well. In the simple example in badge 8 we saw that without data cleaning, 'person Elisabeth' is recognised 435 times. Add extra cleanup steps below to improve that number, even if you just improve it a little bit.
+In the badge 8 we had a good simple test if the entity recognition recognises every sentence of Elisabeth as a person. We have out 'point of truth'/'perfect answer' by just counting the occurrences of a word `Elizabeth` (634 times). Then we use Entity recognition, and check how many times there a word Elizabeth was recognised as a person (e.g. 420 times). If Entity recognition gets very close to simple word count (to 634) then we can be more confident that it works well. In the simple example in badge 8 we saw that without data cleaning, 'person Elisabeth' is recognised 435 times. Add extra cleanup steps below to improve that number, even if you just improve it a little bit.
 
 Here are some ideas: is punctuation removed? what is Elizabeth appears twice in one sentence? (which might be totally legitimate to not put it in twice as an entity). Try to be creative. You are given some starting code below.
 
