@@ -12,7 +12,7 @@ extract_entities <- function(text) {
 }
 
 # for my own use, here I create a better data format so the changes are easier to see:
-show_only_recognised <- function(text){
+show_only_recognised <- function(text) {
   extract_entities(text) %>% # notice we are using one of our functions inside of another of our functions! that's common in programming.
     filter(entity != 'O') %>%
     mutate(full_name = paste(term, entity, sep = "/")) %>%

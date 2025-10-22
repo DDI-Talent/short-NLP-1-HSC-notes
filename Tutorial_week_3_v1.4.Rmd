@@ -24,8 +24,8 @@ pacman::p_load(tibble, stringr)
 and now the data:
 ```{r}
 pride_prejudice_raw_text <- read.delim("./data/pride_prejudice.txt", stringsAsFactor = FALSE)
-colnames(pride_prejudice_raw_text)[1] ="text" 
-pride_prejudice <- as_tibble(pride_prejudice_raw_text) 
+colnames(pride_prejudice_raw_text)[1] <- "text"
+pride_prejudice <- as_tibble(pride_prejudice_raw_text)
 rm(pride_prejudice_raw_text)
 ```
 
