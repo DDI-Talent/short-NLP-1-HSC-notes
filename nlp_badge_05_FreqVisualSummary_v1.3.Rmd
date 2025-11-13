@@ -141,7 +141,7 @@ Ok now you should be equipped to solve the task.
 
 ## For completenes: another way to remove unwanted words:
 
-You can also extend the usual set of `stopwords` which one always removes like "and", "or", "the", etc. And add there words that are in your data (eg. 'http' in this dataset), so that it gets removed at the same time that the `stopwords` are removed. See ecample below:
+You can also extend the usual set of `stopwords` which one always removes like "and", "or", "the", etc. And add there words that are in your data (eg. 'http' in this dataset), so that it gets removed at the same time that the `stopwords` are removed. See example below:
 
 ```{r}
 
@@ -156,7 +156,7 @@ mydata_TB %>%
   count(word, sort = TRUE) %>%
   top_n(30) 
 
-# mini-activity: out of curiousity, add a few more words to this exclusion list, to keep the first results even more relevant (eg. data is obviously about covid_19 so maybe covid words can be removed?) 
+# mini-activity: out of curiosity, add a few more words to this exclusion list, to keep the first results even more relevant (eg. data is obviously about covid_19 so maybe covid words can be removed?) 
 ```
 
 ## TF-IDF (a product of 'Term Frequency' and 'Inverse Document Frequency')
@@ -212,7 +212,7 @@ print(words)
 Now that we have words, let's feed them into the wordcloud:
 
 ```{r wordcloud1}
-set.seed(1234) # see note below abotu seeds. Run this a few times with this line, and a few more times with this line commented out. What changes?
+set.seed(1234) # see note below about seeds. Run this a few times with this line, and a few more times with this line commented out. What changes?
 
 #Now lets draw the word cloud
 wordcloud(
@@ -226,7 +226,7 @@ wordcloud(
 )
 ```
 
-**What is a seed? (Simplified 'Computer Science' explanation)**. When you generate a wordcloud, you leave a lot of things to random chance, like position of words. This means that each time you generate a wordcloud it will look a little different. But sometimes, for reproducibility, you want to stop randomness, and you can achieve that by giving the computer your own 'seed of randomnes'. It is a very specific number, that will force the 'random' elements, to always be the same. For the curious: If you do not plant a concrete seed, the library will pick one for you (e.g. current date as a millisecond), so each time you generate a wordcloud it will be slightly different.
+**What is a seed? (Simplified 'Computer Science' explanation)**. When you generate a wordcloud, you leave a lot of things to random chance, like position of words. This means that each time you generate a wordcloud it will look a little different. But sometimes, for reproducibility, you want to stop randomness, and you can achieve that by giving the computer your own 'seed of randomness'. It is a very specific number, that will force the 'random' elements, to always be the same. For the curious: If you do not plant a concrete seed, the library will pick one for you (e.g. current date as a millisecond), so each time you generate a wordcloud it will be slightly different.
 
 If you do not specify the seed consistency if you want to produce exactly the same word cloud next time you run this. Try to commend out the line with the seed above, and re-generate the wordcloud a few times - do you see them being different each time? In general Seeds are great when you are building and debugging, it means that you fully control what is going on in your graph.
 
@@ -288,7 +288,7 @@ bigram_graph <- mydata_words_bigrams %>%
   filter(n > 20) %>%
   graph_from_data_frame()
 
-#Show the word co-occurances: these are words happening immediately next to each other frequently:
+#Show the word co-occurrences: these are words happening immediately next to each other frequently:
 bigram_graph
 ```
 
@@ -407,7 +407,7 @@ and then:
 lexical_diversity <- sapply(strsplit(text_data, "\\s+"), function(words) { length(unique(words)) / length(words) }) 
 
 print(lexical_diversity) 
-# lexical complexity (why is the middle sentence less fomplex?)
+# lexical complexity (why is the middle sentence less complex?)
 ```
 and then:
 ```{r }
@@ -421,7 +421,7 @@ total_stopwords <- nrow(tokenized_text) - nrow(non_stop_words)
 percentage_stopwords <- total_stopwords / nrow(tokenized_text) * 100 
 
 print(percentage_stopwords) 
-# precentage stopwords: (in the whole set)
+# percentage stopwords: (in the whole set)
 ```
 and then:
 

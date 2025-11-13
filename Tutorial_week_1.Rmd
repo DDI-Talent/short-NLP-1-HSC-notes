@@ -1,7 +1,7 @@
 # Tutorial 1: Pride, Prejudice and NLP
 
 In the first tutorial we will just try to have some fun with a text of an old book. 
-We picked a freely available copy (via guttenberg project) of "Pride and Prejudice" by English author Jane Austen from 1813.
+We picked a freely available copy (via Gutenberg project) of "Pride and Prejudice" by English author Jane Austen from 1813.
 
 Below you will find a piece of code that loads the book. From there on, try to tackle tasks with your partner, and try to have some fun. We'd like to encourage you to switch after each task who's the driver (the person sharing their screen and typing).
 
@@ -23,7 +23,7 @@ Just use the string and regex skills that you have, at times you might have to b
 
 ## Task 2. [SOMETHING] and [SOMETHING] (anonymisation by hand)
 
-We will learn more about entity recognition in the incomming badges, but could you 'anonymise' the book by replacing all names of characters with a tag like `[CHARACTER]` and maybe all places with `[LOCATION]`. If you do not know the book, here's a list of some [characters](https://en.wikipedia.org/wiki/Pride_and_Prejudice#Characters). In terms of locations you could start with "Longbourn estate", "Meryton", "Hertfordshire" and "England". But also you migth chose to 'anynymise' something completely different. How about all gerrund verbs like `...ing` as `[ACTION]` or days of the week?
+We will learn more about entity recognition in the incoming badges, but could you 'anonymise' the book by replacing all names of characters with a tag like `[CHARACTER]` and maybe all places with `[LOCATION]`. If you do not know the book, here's a list of some [characters](https://en.wikipedia.org/wiki/Pride_and_Prejudice#Characters). In terms of locations you could start with "Longbourn estate", "Meryton", "Hertfordshire" and "England". But also you might chose to 'anonymise' something completely different. How about all gerund verbs like `...ing` as `[ACTION]` or days of the week?
 
 ```{r}
 # your code here. You can create more 'code cells' with a green [+c] icon on top 
