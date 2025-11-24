@@ -10,7 +10,7 @@ This notebook should only take you about a minute.
 
 ## What is a R Markdown notebook / file:
 
-Each badge video will be accompanied by a notebook like this. In it you will find more in depth explanations of content you've watched and also some new ones. There will also be a lot of coding examples and tasks 
+Each badge video will be accompanied by a notebook like this. In it you will find more in-depth explanations of content you've watched and also some new ones. There will also be a lot of coding examples and tasks 
 
 ```{r}
 # you can write your code here
