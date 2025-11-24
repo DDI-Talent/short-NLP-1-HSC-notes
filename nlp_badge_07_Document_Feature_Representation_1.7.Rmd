@@ -5,7 +5,7 @@ output: html_notebook
 
 # Document Feature Representation
 
-In this badge we are going to explore different ways to create document vector representations with the *tm, quanteda* and *tidytext* package. We are going to create Bag of Word vectors (using frequency counts) and TF-IDF. We will put these vectors into document frequencies tables (we talked about these in week2).
+In this badge we are going to explore different ways to create document vector representations with the *tm, quanteda* and *tidytext* package. We are going to create Bag of Word vectors (using frequency counts) and TF-IDF. We will put these vectors into document frequencies tables (we talked about these in week 2).
 
 These packages have differing functionalities for doing things like lower case, punctuation removal, stemming etc. You may find you want to mix and match the functionalities so it is useful to be able to move data between these packages.
 
@@ -28,7 +28,7 @@ find("tm_map")
 find("data.frame")
 find("inspect")
 # notice that some functions like `inspect` are defined in many libraries. 
-# to be sure which one you're useing you'd call them as pryr::inspect or tm::inspect (you'll see this later)
+# to be sure which one you're using you'd call them as pryr::inspect or tm::inspect (you'll see this later)
 ```
 Next let's create a sample dataframe with one column for document IDs and one column for text. It's easier to work with a small sample set of text first to see what is going on.
 
@@ -47,7 +47,7 @@ df
 
 ## Method 1: We will use the `tm` package
 
-The `tm` package is a popular choice for text mining in R as it provides easy-to-use tools to create DTMs and apply term frequency (TF) and term frequency-inverse document frequency (TF-IDF) weightings. DTMs hold our nerical representations of the document - our document vectors.
+The `tm` package is a popular choice for text mining in R as it provides easy-to-use tools to create Document Term Matrices (DTMs) and apply term frequency (TF) and term frequency-inverse document frequency (TF-IDF) weightings. DTMs hold our numerical representations of the document - our document vectors.
 
 1.  Install and Load `tm`
 2.  Create a Document-Term Matrix with our sample data, here we are counting the frequencies of our terms so we are creating bag of words vectors
@@ -94,7 +94,7 @@ If you've been trying for a few minutes, but cannot find above options in the do
 OK, let's use this method on some real data: We have used a sample data frame but you might be wondering, how would I get my Corona tweet text data into tm as a corpus.
 
 ```{r}
-#Load the corona csv to a datframe
+#Load the corona csv to a dataframe
 file_path='./data/CORONA_TWEETS.csv'
 Corona_NLP_DF <- read.csv(file_path, stringsAsFactors =FALSE, header=TRUE)
 
@@ -133,7 +133,7 @@ print(dfm_tfidf)
 ```
 
 
-**If you see warnings at this point...** When woring on our own computers (not Noteable) We have found sometimes there are depreciation warnings when using this packages and incompatibilities so recently I tend to use the tidytext and tm more. That said there are some excellent blogs where people have used quanteda particularly around politics to analyse textdata.
+**If you see warnings at this point...** When working on our own computers (not Noteable) We have found sometimes there are deprecation warnings when using this package and incompatibilities so recently I tend to use the tidytext and tm more. That said there are some excellent blogs where people have used quanteda particularly around politics to analyse text data.
 
 [Here is the quanteda vignette](https://cran.r-project.org/web/packages/quanteda/vignettes/quickstart.html)
 Feel free to look at some of the options when using the quanteda package.
@@ -191,7 +191,7 @@ To do this we will:
 
 1.  Create a tibble with term frequencies
 
-2.  Convert our tibble with term frequncies it to a Document-Term Matrix (DTM) using cast_dtm().
+2.  Convert our tibble with term frequencies it to a Document-Term Matrix (DTM) using `cast_dtm()`.
 
 The `cast_dtm()` function takes three arguments:
 
@@ -291,14 +291,14 @@ glove_file_name <- "./data/wiki_giga_2024_50_MFT20_vectors_seed_123_alpha_0.75_e
 
 # Load GloVe embeddings (I find sometimes trying to read as a csv can cause memory issues depending on your set-up)
 IF_MEMORY_IS_SPARESE_LOAD_JUST_THIS_MANY_WORDS <- 100000 # to load everything, change this value to -1
-# if you limit the word cooccurances here, keep in mind that some words will be missing (e.g. 'itemising')
+# if you limit the word co-occurrences here, keep in mind that some words will be missing (e.g. 'itemising')
 
 glove_embeddings <- fread(glove_file_name, header = FALSE, quote = " ", nrows = IF_MEMORY_IS_SPARESE_LOAD_JUST_THIS_MANY_WORDS)
 
 # Setting the column names based on 100-dimensional embeddings
 setnames(glove_embeddings, c("word", paste0("V", 1:50)))  
 
-# Convert the embeddings to a matrix and assign the words as teh row names
+# Convert the embeddings to a matrix and assign the words as the row names
 glove_matrix <- as.matrix(glove_embeddings[, -1, with = FALSE])
 rownames(glove_matrix) <- glove_embeddings$word
 ```
@@ -348,17 +348,17 @@ similarity
 ```{r}
 # Example: Similarity between two words
 # but this time let's measure how long it takes:
-print(paste("start: ",Sys.time()))
+print(paste("start: ", Sys.time()))
 
 word1 <- "banana"
 word2 <- "yellow"
 
 similarity <- cosine_similarity(glove_matrix[word1, ], glove_matrix[word2, ])
 print(similarity)
-print(paste("end on:",Sys.time()))
+print(paste("end on:", Sys.time()))
 ```
 
-Here's a more clearly written function which will calculate simmilarity of two words for us. Math is the same, but the 'interface' is better - we just give it two words and glove matrix, and the function does the magic for us, like this: `get_word_similarity("hospital", "clinic", glove_matrix)`
+Here's a more clearly written function which will calculate similarity of two words for us. Math is the same, but the 'interface' is better - we just give it two words and glove matrix, and the function does the magic for us, like this: `get_word_similarity("hospital", "clinic", glove_matrix)`
 
 ```{r}
 
@@ -397,7 +397,7 @@ get_connected_words <- function(target_word, glove_words_matrix, how_many = 10){
 	
 	similarities <- (glove_words_matrix %*% target_vec) / (glove_norms * target_norm)
 	
-	# and here we will order those simmilarities and just grab thetop few.
+	# and here we will order those similarities and just grab the top few.
 	similar_words_indexes <- order(similarities, decreasing = TRUE)[1:how_many]  # Indexes of Top X similar words
 	similar_words <- rownames(glove_words_matrix)[similar_words_indexes] # actual Top X similar words
 	similar_words
@@ -422,7 +422,7 @@ Ok... this code is difficult. Especially the line starting with `apply...`. We w
 
 ## A word from our sponsor: FUNCTIONS and APPLY
 
-Let's recap a bit about **FUNCTIONS**. You build your own functions to EXTEND the R language, and add more functionality to it. For example R might not have a function `is_positive( some_number )` that will tell you if number is positive... so you can buuld it
+Let's recap a bit about **FUNCTIONS**. You build your own functions to EXTEND the R language, and add more functionality to it. For example R might not have a function `is_positive( some_number )` that will tell you if number is positive... so you can build it
 
 ```{r}
 is_positive <- function( some_number ){
@@ -444,7 +444,7 @@ nth_character("banana", 3)
 nth_character("banana", 4)
 nth_character("kiwi", 1)
 ```
-But what if you wanted to apply a function many times, eg to each item in a collection?
+But what if you wanted to apply a function many times, e.g. to each item in a collection?
 
 Let's dissect the onion-like code above, bit by bit. First:
 
@@ -453,8 +453,8 @@ Let's dissect the onion-like code above, bit by bit. First:
 It will apply will use/apply a function to each item in a collection of items. Number `1` means go row by row. `2` would mean go column by column.
 
 ```{r}
-fruits = data.frame(name=c("banana","kiwi","plum"), 
-                    color=c("yellow","green","purple"))
+fruits = data.frame(name = c("banana", "kiwi", "plum"), 
+                    color = c("yellow", "green", "purple"))
 
 apply( fruits, 1, nchar)  # this will apply nchar (number of characters) to each item
 ```
