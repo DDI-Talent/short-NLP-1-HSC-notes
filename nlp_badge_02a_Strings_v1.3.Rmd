@@ -30,11 +30,11 @@ Here are some useful functions:
 
 stringr/stringi: similar to functionality with *substr*, *grep* but with some added functionality (e.g. str_to_title). The *stringr* package is mostly a wrapper for the *stringi* functions, with some additional functions.
 
-*tidytext* and *tidyverse* also have functions to clean and process data which we will see next week.
+The *stringr* package is part of the tidyverse (a suite of packages). These are useful for cleaning and processing data, and we will explore more of them next week.
 
 **Reminder: Useful string rules**
 
--   Quotes at the beginning and end of a string should be `"both double quotes"` or `'both single quotes'`. They can not be mixed.
+-   Quotes at the beginning and end of a string should be `"both double quotes"` or `'both single quotes'`. They cannot be mixed.
 
 -   'Double quotes, `"`, can be inserted into a string starting and ending with a single quote'.
 
@@ -43,7 +43,7 @@ stringr/stringi: similar to functionality with *substr*, *grep* but with some ad
 Lets get started with creating a simple string and printing it out.
 
 ```{r start}
-mystring <-"We Love NLP!"
+mystring <- "We Love NLP!"
 print(mystring)
 ```
 
@@ -62,7 +62,7 @@ paste(c('We', 'love', 'NLP', '!'), collapse = ' ')
 # paste0 is short cut to collapse that concatenates with no space
 paste0('We','love','NLP', '!') 
 
-# concatenate two strings
+# Concatenate two strings
 mystr1 <- "We love"
 mystr2 <- "NLP!"
 paste(mystr1, mystr2, sep = " ", collapse = "NULL")
@@ -84,11 +84,11 @@ We can also change the case of our text string
 ```{r casechange}
 mystring <- c('We Love NLP!')
 
-#to lower case
+# To lower case
 mystring_lower <- tolower(mystring)
 print(mystring_lower)
 
-#to upper case
+# To upper case
 mystring_upper <- toupper(mystring)
 print(mystring_upper)
 ```
@@ -106,7 +106,7 @@ Syntax: `substring(x, first, last)`
 `last` - position of the last character to be extracted.
 
 ```{r sub}
-# Extract characters from 1th to 5th position.
+# Extract characters from 1st to 5th position.
 sub_mystring <- substring(mystring, 1, 5)
 print(sub_mystring)
 ```
@@ -124,14 +124,14 @@ grep('NLP', mystrings1)
 mystrings2 <- c("NLP", "nLP", "NLP", "nlP")
 grep('NLP', mystrings2)
 
-#Same again but ignore the case
+# Same again but ignore the case
 mystrings3 <- c("NLP", "nLP", "nlp", "nlP")
 grep('nlp', mystrings3, ignore.case ="True")
 
 
 ```
 
-We can also use the *stringr* package to manipulate strings and *tidyverse* has a library of possibilities and a few of which we will demonstrate below.
+We can also use the *stringr* package to manipulate strings in a variety of ways, a few of which we will demonstrate below.
 
 We need to make sure the libraries are installed and loaded first
 
@@ -140,14 +140,17 @@ We need to make sure the libraries are installed and loaded first
 if (!require(stringr)){ # this  optionally checks first if you might already have this library
   install.packages("stringr") # this installs the package
 }
-#now load the library
+
+# Now load the library
 library(stringr)
 ```
 
-Follow the command below to explore the functionality.
+The `stringr` package gives us many ways to manipulate strings. Explore the code below to see some examples. 
+
+*Tip:* You can use Ctrl+Shift+Enter to run a code chunk.
 
 ```{r strcommands}
-#Creation of a string
+# Creation of a string
 mystring <- 'We love NLP! Do you LOVE NLP?'
 print(mystring)
 ```
@@ -155,15 +158,14 @@ print(mystring)
 -   `str_locate()`
 
 ```{r }
-
-#locate character position of string of interest.
-str_locate(mystring, "NLP")# outputs the characters where the word is found - only outputs the first one found
+# Locate character position of string of interest.
+str_locate(mystring, "NLP") # Outputs the characters where the word is found - only outputs the first one found
 ```
 
 -   `str_replace()`
 
 ```{r }
-#Replace a word
+# Replace a word
 mystring <- c('We love NLP! Do you LOVE NLP?')
 
 print(mystring)
@@ -173,7 +175,7 @@ str_replace(mystring, "We", "Cats")
 -   `str_extract()`
 
 ```{r }
-#Detects if the string is present
+# Detects if the string is present
 str_extract(mystring, "love")  
 ```
 
@@ -182,21 +184,21 @@ str_extract(mystring, "love")
 ```{r }
 mystring <- c('We love NLP! Do you LOVE NLP?')
 
-# shows the length of the string
+# Shows the length of the string
 str_length(mystring) 
 ```
 
 -  `str_count()`
 
 ```{r }
-# counts how many times the string occurs
+# Counts how many times the string occurs
 str_count(mystring, "NLP") 
 ```
 
 -   `str_detect()`
 
 ```{r }
-# tells if there is a match in the string 
+# Tells if there is a match in the string 
 str_detect(mystring, "NLP")
 ```
 
@@ -213,7 +215,7 @@ strings4concat <-
     'I know my cat, Mielo is so miserable. She does not want to go out.'
   )
 
-# write your code here
+# Write your code here
 
 ```
 
@@ -222,7 +224,7 @@ strings4concat <-
 2)  How many times does the word I appear?
 
 ```{r}
-# write your code here
+# Write your code here
 
 ```
 
@@ -231,7 +233,7 @@ strings4concat <-
 3)  How long is the text?
 
 ```{r}
-# write your code here
+# Write your code here
 
 ```
 
@@ -240,7 +242,7 @@ strings4concat <-
 4)  Replace Meilo with Pippa.
 
 ```{r}
-# write your code here
+# Write your code here
 
 ```
 
@@ -249,7 +251,7 @@ strings4concat <-
 5)  Expand the string to also say 'I will come visit on Sunday and bring Pippa treats.' at the end
 
 ```{r}
-# write your code here
+# Write your code here
 
 ```
 
