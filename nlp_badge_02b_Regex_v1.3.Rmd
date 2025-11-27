@@ -105,7 +105,7 @@ In the example below:
 
 -   `*` - expects that match zero or more times
 
--   `\s` - means a 'space' character So `.*\s*` means match any character until it matches a zero or more spaces.
+-   `\s` - means a 'space' character So `.*\s*` means match any or no character until it matches a zero or more spaces.
 
 -   `$` - matches end of string (not an actual dollar symbol `$`, because `$` has a special meaning like `.` or `*`., you will read about it below)
 
@@ -277,7 +277,7 @@ my_sentence <- "Hello, how are you today? I am looking forward to fun with NLP. 
 
 [hint for task 02](./hints/hint_2b_2.Rmd)
 
-3)  Let's come back to using regex: You know how to capture time on the simple 1pm format. But how would you capture time in this new format e.g.. 1:30pm? And then how would you write a regex which could capture time in EITHER one of the formats? 1pm and 1:30pm? Regex has an OR operator for which you use the 'pipe symbol' which looks like this `|` so you can say `a|b` meaning `a` or `b` 
+3)  Let's come back to using regex: You know how to capture time on the simple 1pm format. But how would you capture time in this new format e.g.. 1:30pm? And then how would you write a regex which could capture time in EITHER one of the formats? 1pm and 1:30pm? Regex has an OR operator for which you use the 'pipe symbol' which looks like this `|` so you can say `a|b` meaning `a` or `b`
 
 ```{r }
 my_sentence <- "Hello, how are you today? I am looking forward to fun with NLP. What time does it start? It starts at 1:30pm, do you want to do lunch at 12pm?"
@@ -286,7 +286,6 @@ my_sentence <- "Hello, how are you today? I am looking forward to fun with NLP. 
 ```
 
 [hint for task 03](./hints/hint_2b_3.Rmd)
-
 
 ## Activity 2:
 

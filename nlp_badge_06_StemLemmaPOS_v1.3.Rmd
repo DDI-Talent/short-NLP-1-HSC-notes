@@ -65,7 +65,7 @@ stems <- my_text_about_cats %>%
 stems
 ```
 
-Wouldn't it be nice if the library could do the splitting into words for us? Of course! Indeed, this is R, so obviously there is a function for that! Indeed there are two functions we can use here: `stem_words()` and `stem_strings()`
+Wouldn't it be nice if the library could do the splitting into words for us? Of course! Indeed, this is R, so obviously there is a function for that! Indeed there are two functions we can use here: `stem_words()` and `stem_strings()` comes from the `textstem` package.
 
 Notice an important difference between those two methods: - `stem_words()` expects a vector of words, and will find stem in each item in that vector. So you usually have to do the work of preparing the data, but also you have more control over the result.
 
@@ -85,7 +85,7 @@ my_text_about_cats %>%
 
 Also from the video you know what Lemmas are. But now let's see them in code.
 
-Here we use the `textstem` package to produce lemmas. (This package will also do stemming). Just like with above examples there are two functions we'll use: one expects vector as words, and one vector of more complex strings (which it will split into words by itself).
+Again, here we use the `textstem` package to produce lemmas. (This package will also do stemming). Just like with above examples there are two functions we'll use: one expects vector as words, and one vector of more complex strings (which it will split into words by itself).
 
 Below are some interesting examples:
 
@@ -196,10 +196,11 @@ freq.distribution.upos <-
 
 freq.distribution.upos$key <-
   factor(freq.distribution.upos$key,
-         levels = rev(freq.distribution.upos$key))
-
+         levels = rev(freq.distribution.upos$key)) #could use it without rev but need reorder in the barchart later
+       # levels = freq.distribution.upos$key) 
 barchart(
   key ~ freq,
+ #reorder(key,freq) ~ freq,
   data = freq.distribution.upos,
   col = "dodgerblue",
   main = "UPOS frequencies",

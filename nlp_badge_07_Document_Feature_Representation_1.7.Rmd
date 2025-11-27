@@ -1,6 +1,8 @@
 ---
 title: "Badge 7 Document Feature Representation"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 # Document Feature Representation
@@ -11,7 +13,6 @@ These packages have differing functionalities for doing things like lower case, 
 
 Let's make sure we have the packages we need installed.
 
-
 ```{r load_library}
 # WHEN YOU RUN THIS CODE, YOU MIGHT BE ASKED IF YOU'D LIKE TO RELOAD RSTUDIO: **ANSWER 'NO'**
 # for all packages we need:
@@ -19,6 +20,7 @@ install.packages("pacman")
 pacman::p_load(tm, quanteda, tidytext, dplyr, tidyverse, pryr, chunked)
 
 ```
+
 As we install more and more packages, sometimes you start thinking `Which package does this specific function come from?`. Code R has a wonderful function for you called `find( FUNCTION_NAME )`. You can pass any FUNCTION_NAME into it, and you'll find out which package it comes from!
 
 ```{r}
@@ -30,6 +32,7 @@ find("inspect")
 # notice that some functions like `inspect` are defined in many libraries. 
 # to be sure which one you're using you'd call them as pryr::inspect or tm::inspect (you'll see this later)
 ```
+
 Next let's create a sample dataframe with one column for document IDs and one column for text. It's easier to work with a small sample set of text first to see what is going on.
 
 ```{r}
@@ -87,9 +90,7 @@ Wait WHAT IS A VIGNETTE? It is an online fine with the official documentation of
 # your code here
 ```
 
-If you've been trying for a few minutes, but cannot find above options in the documentation, just a look at the answer:
-[Hint: Answer](./hints/hint_7_1.Rmd)
-
+If you've been trying for a few minutes, but cannot find above options in the documentation, just a look at the answer: [Hint: Answer](./hints/hint_7_1.Rmd)
 
 OK, let's use this method on some real data: We have used a sample data frame but you might be wondering, how would I get my Corona tweet text data into tm as a corpus.
 
@@ -132,11 +133,9 @@ print(dfm_tfidf)
 
 ```
 
-
 **If you see warnings at this point...** When working on our own computers (not Noteable) We have found sometimes there are deprecation warnings when using this package and incompatibilities so recently I tend to use the tidytext and tm more. That said there are some excellent blogs where people have used quanteda particularly around politics to analyse text data.
 
-[Here is the quanteda vignette](https://cran.r-project.org/web/packages/quanteda/vignettes/quickstart.html)
-Feel free to look at some of the options when using the quanteda package.
+[Here is the quanteda vignette](https://cran.r-project.org/web/packages/quanteda/vignettes/quickstart.html) Feel free to look at some of the options when using the quanteda package.
 
 ## Method 3: Using tidytext and dplyr Packages
 
@@ -185,7 +184,7 @@ print(df_tfidf)
 
 ```
 
-We would like a document term matrix in tidytext format. 
+We would like a document term matrix in tidytext format.
 
 To do this we will:
 
@@ -196,7 +195,9 @@ To do this we will:
 The `cast_dtm()` function takes three arguments:
 
 -   `document`: the column representing document IDs
+
 -   `term`: the column representing terms (words)
+
 -   `value`: the column representing term frequencies or counts
 
     cast_dtm(doc_id, word, n): We are creating a DTM with doc_id as the rows (documents), word as the columns (terms), and n as the term frequency values.
@@ -258,10 +259,9 @@ If you're feeling brave, try to write this code yourself. But if you are struggl
 
 [Hint: Answer](./hints/hint_7_2.Rmd)
 
-
 ## Word Embeddings - GloVE 🧤
 
-We will load GloVE embeddings and have a look at the embedding document vector for the words. GloVE is a Standford project which generates and shares with the world word similarity matrix. It is really amazing, and explains quite well how it works [on their website](https://nlp.stanford.edu/projects/glove/) 
+We will load GloVE embeddings and have a look at the embedding document vector for the words. GloVE is a Standford project which generates and shares with the world word similarity matrix. It is really amazing, and explains quite well how it works [on their website](https://nlp.stanford.edu/projects/glove/)
 
 This is a large download (a few minutes) so get the downloading started by running below code block, and meanwhile continue with notebook
 
@@ -271,34 +271,32 @@ This is a large download (a few minutes) so get the downloading started by runni
 # (but you won't be able to run code until the download is finished)
 options(timeout = 1200)
 filename_url <- "https://nlp.stanford.edu/data/wordvecs/glove.2024.wikigiga.50d.zip"
-filename_local <- "./data/glove.2024.wikigiga.50d.zip"
-if (!file.exists(filename_local)){
-	download.file(filename, filename_local) 
-  unzip(filename_local, exdir="./data/") 
+filename_local_zip <- "./data/glove.2024.wikigiga.50d.zip"
+
+filename_local_glove <- "./data/wiki_giga_2024_50_MFT20_vectors_seed_123_alpha_0.75_eta_0.075_combined.txt"
+
+# only get files if we do not have them yet
+if (!file.exists(filename_local_glove)){
+	if (!file.exists(filename_local_zip)){
+		download.file(filename_url, filename_local_zip) 
+	}
+	unzip(filename_local_zip, exdir="./data/") 
+	file.remove(filename_local_zip)
 }
 ```
 
-
-Note that below operations will take a lot of memory, for people using environment with limited memory (like posit cloud) try to load just the first 100000 lines. (full file has almost 2 million lines).
-
+Note that operations below will take a lot of memory, for people using an environment with limited memory (like Posit Cloud) try to load just the first 100000 lines. (full file has almost 2 million lines).
 
 ```{r}
-# rm(list = setdiff(ls(), "")) # another way to have more memory os to clean your environment, like this
-
-library(data.table)
-# Specify the path to the GloVe file
-glove_file_name <- "./data/wiki_giga_2024_50_MFT20_vectors_seed_123_alpha_0.75_eta_0.075_combined.txt"
-
 # Load GloVe embeddings (I find sometimes trying to read as a csv can cause memory issues depending on your set-up)
-IF_MEMORY_IS_SPARESE_LOAD_JUST_THIS_MANY_WORDS <- 100000 # to load everything, change this value to -1
-# if you limit the word co-occurrences here, keep in mind that some words will be missing (e.g. 'itemising')
+IF_LOW_MEMORY_LOAD_JUST_THIS_MANY_WORDS <- 100000 # to load everything, change this value to -1
 
-glove_embeddings <- fread(glove_file_name, header = FALSE, quote = " ", nrows = IF_MEMORY_IS_SPARESE_LOAD_JUST_THIS_MANY_WORDS)
+glove_embeddings <- fread(filename_local_glove, header = FALSE, quote = " ", nrows = IF_LOW_MEMORY_LOAD_JUST_THIS_MANY_WORDS)
 
 # Setting the column names based on 100-dimensional embeddings
 setnames(glove_embeddings, c("word", paste0("V", 1:50)))  
 
-# Convert the embeddings to a matrix and assign the words as the row names
+# Convert the embeddings to a matrix and assign the words as teh row names
 glove_matrix <- as.matrix(glove_embeddings[, -1, with = FALSE])
 rownames(glove_matrix) <- glove_embeddings$word
 ```
@@ -307,9 +305,9 @@ In the `Environment` tab in RStudio click on `glove_matrix` to view the document
 
 We will now:
 
-- calculate the similarity between two words based on their document vectors
+-   calculate the similarity between two words based on their document vectors
 
-- find words similar to our input word
+-   find words similar to our input word
 
 Note this last one can take some time to compute.
 
@@ -330,6 +328,7 @@ word2 <- "queen"
 similarity <- cosine_similarity(glove_matrix[word1, ], glove_matrix[word2, ])
 print(similarity)
 ```
+
 ```{r}
 # Example: Similarity between two words
 word1 <- "banana"
@@ -337,6 +336,7 @@ word2 <- "queen"
 similarity <- cosine_similarity(glove_matrix[word1, ], glove_matrix[word2, ])
 print(similarity)
 ```
+
 ```{r}
 # Example: Similarity between two words
 word1 <- "banana"
@@ -412,13 +412,14 @@ get_connected_words("sick",glove_matrix)
 # and now let's use our function many many times, ooooh! this might come handy:
 
 You could even batch apply this function:
+
 ```{r}
 some_words <- data.frame(word = c("hospital", "clinic", "practice"))
 some_words_connectios <- apply(some_words, 1, get_connected_words, glove_matrix) 
 some_words_connectios
 ```
-Ok... this code is difficult. Especially the line starting with `apply...`. We will now take a few minutes to REALLY understand it. But of you are already very confident in your use of functions and apply, feel free to just down to the activity.
 
+Ok... this code is difficult. Especially the line starting with `apply...`. We will now take a few minutes to REALLY understand it. But of you are already very confident in your use of functions and apply, feel free to just down to the activity.
 
 ## A word from our sponsor: FUNCTIONS and APPLY
 
@@ -433,6 +434,7 @@ is_positive(5)
 is_positive(-3)
 is_positive(83)
 ```
+
 Functions can take many arguments
 
 ```{r}
@@ -444,11 +446,12 @@ nth_character("banana", 3)
 nth_character("banana", 4)
 nth_character("kiwi", 1)
 ```
+
 But what if you wanted to apply a function many times, e.g. to each item in a collection?
 
 Let's dissect the onion-like code above, bit by bit. First:
 
-- `apply( collection, 1, function_name)` 
+-   `apply( collection, 1, function_name)`
 
 It will apply will use/apply a function to each item in a collection of items. Number `1` means go row by row. `2` would mean go column by column.
 
@@ -490,6 +493,7 @@ descriptions
 ```
 
 And finally, if you function takes multiple arguments, you can just pass them on, inside your apply, like this:
+
 ```{r}
 say_color_n_times <- function(fruit, times){
 	strrep(fruit['color'],times)
@@ -498,6 +502,7 @@ say_color_n_times <- function(fruit, times){
 descriptions <- apply(fruits, 1, say_color_n_times, 3 ) # this will repeat each fruit colour 3 times
 descriptions
 ```
+
 So, to bring it back where we started:
 
 ```{r}
@@ -505,18 +510,17 @@ some_words <- data.frame(word = c("hospital", "clinic", "practice"))
 some_words_connections <- apply(some_words, 1, get_connected_words, glove_matrix, 10) 
 some_words_connections
 ```
+
 ## ACTIVITY: Your own funcitons similarity( word1, word2) and words_similar_to(word)
 
 What could you do with the newly acquired ability to identify co-appearing words? Think of a simple scenario and write code which makes it happen. Try to write it as a function.
 
-Some ideas: 
-- given list of words (e.g. sick, ill) get a list of co-appearing words which they have in common e.g. all 2 words share co-occurrence with "treated"
+Some ideas: - given list of words (e.g. sick, ill) get a list of co-appearing words which they have in common e.g. all 2 words share co-occurrence with "treated"
 
 ```{r}
 
 
 ```
-
 
 # Reflection:
 

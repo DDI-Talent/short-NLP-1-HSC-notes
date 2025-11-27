@@ -103,13 +103,6 @@ pacman::p_load(ggplot2, tidyr)
 ```
 
 ```{r}
-#Create our corona sentiment tibble
-corona_sentiment <- corona_words %>%
-  inner_join(get_sentiments("bing")) %>%
-  count(Location,index=row_number(), sentiment) %>%
-  pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>% 
-  mutate(sentiment = positive - negative)
-
 #Get our word counts
 bing_word_counts <- corona_words %>%
   inner_join(get_sentiments("bing")) %>%
@@ -158,10 +151,22 @@ pacman::p_load(wordcloud, reshape, reshape2)
 and now let's look at things:
 
 ```{r}
+# option 1 using acast
 corona_words %>%
   inner_join(get_sentiments("bing")) %>%
   count(word, sentiment, sort = TRUE) %>%
   acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = c("gray20", "gray80"),
+                   max.words = 100)
+
+
+# option 2 using a couple of function instead of acast: pivot_wider, column_to_rownames and as.matrix
+corona_words %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE) %>%
+  pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>%
+  column_to_rownames("word") %>%       # set word column as rownames
+  as.matrix() %>%                      # now convert only numeric columns
   comparison.cloud(colors = c("gray20", "gray80"),
                    max.words = 100)
 ```

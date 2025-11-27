@@ -122,7 +122,7 @@ You can also subset based on values using subset(). Maybe you only want to look 
 
 ```{r}
 # Based on string value
-Corona_DF_UK <- subset(Corona_DF, Location = "UK") 
+Corona_DF_UK <- subset(Corona_DF, Location == "UK") 
 glimpse(Corona_DF_UK)
 ```
 
